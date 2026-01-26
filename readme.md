@@ -1,45 +1,45 @@
-# Video
+# Problem statement 1 - Analysis of short form videos
+
+Design and evaluate an end-to-end, multi-modal pipeline that automatically extracts **fashion and pricing trends** from short-form product videos (e.g., YouTube/Instagram), inspired by the methods in:
 
 https://link.springer.com/article/10.1007/s00521-025-11218-1
-file:///Users/admin/Library/CloudStorage/OneDrive-Personal/Documents/07.%20IISc/Subjects/IEEE%20papers%20and%20ppts/s00521-025-11218-1.pdf
 
-| **Task**                   | **Recommended Library/Model**                |
-| -------------------------- | -------------------------------------------- |
-| **Pipeline Orchestration** | `MoviePy` or `FFmpeg`                        |
-| **Transcription**          | `Whisper` (Local or API)                     |
-| **Visual Capture**         | `OpenCV` (using `cv2.absdiff` for keyframes) |
-| **Visual Analysis**        | `LLaVA` or `GPT-4V`                          |
-To elevate this from a simple script to an **M.Tech-level research project**, you need to shift from "basic data extraction" to "intelligent architectural design". For a Master’s project, examiners look for **novelty**, **performance optimization**, and **comparative analysis**.
+The system should jointly analyze audio (speech), visual frames, and on-screen text to detect emerging trends (e.g., "linen shirts under ₹200"), with a focus on **robustness, scalability, and research-grade evaluation** suitable for an M.Tech project.
 
-Here are four ways to add academic and technical complexity to your project:
-### 1. Advanced Keyframe Extraction (Scene Intelligence)
-Instead of taking a frame every 2 seconds, implement an algorithm that detects **semantic shifts**.
-* **Feature:** Use **Histogram Difference** or **Structural Similarity Index (SSIM)** to detect scene changes.
-* **Complexity:** Implement a **Shot Boundary Detection** algorithm that differentiates between a "camera move" and a "hard cut". This ensures you only send unique, high-value frames to your Vision LLM, reducing noise and API costs.
-### 2. Temporal Multi-Modal Fusion
-Basic scripts treat audio and video as separate logs. A sophisticated project links them in time.
-* **Feature:** Create a **Temporal Alignment Layer** that syncs Whisper timestamps with specific visual keyframes.
-* **Complexity:** Develop a system where the LLM can "reason" about contradictions—for example, if the audio says "affordable" but the vision model detects "luxury brand logos," how does the system resolve the discrepancy?.
-### 3. Agentic Workflow for Trend Verification
-Instead of one summary, use an **Agentic Loop**.
-* **Feature:** Use a "Search Agent" to verify trends in real-time.
-* **Complexity:** Once the script identifies a trend (e.g., "Linen under ₹200"), have the agent automatically query the Google Search or YouTube Search API to check if this is a rising trend across the platform or just a one-off video.
-### 4. Performance Metrics and Benchmarking
-M.Tech projects require data-driven validation.
-* **Feature:** Create a "Ground Truth" dataset of 50 videos with manually labeled trends.
-* **Complexity:** Compare the accuracy of different models (e.g., Whisper-Small vs. Whisper-Large, or GPT-4o vs. a local LLaVA model). Measure **Precision, Recall, and F1-score** for trend detection.
----
-### Suggested M.Tech Architecture
-### Technical Modules to Add to your Colab:
+## Tentative solution and packages
 
-| Module                   | Complexity Level | Tech Stack                                                                      |
-| ------------------------ | ---------------- | ------------------------------------------------------------------------------- |
-| **OCR & Logo Detection** | Medium           | EasyOCR or YOLOv8 (Detecting brand logos in the video)                          |
-| **Sentiment Analysis**   | Low              | TextBlob or VADER (Analyzing the tone of the comments/transcript)               |
-| **Graph-Based Trends**   | High             | NetworkX (Linking common keywords across 100+ videos to find a "trend cluster") |
+The pipeline is decomposed into stages, each mapped to concrete libraries/models:
 
-Would you like me to provide a **YOLOv8 code block** to help you start detecting specific objects (like "shirts" or "logos") as a more advanced visual layer?
-# Agentic AI planning
+| **Stage / Task**            | **Role in pipeline**                                             | **Recommended Library/Model**                |
+| --------------------------- | ---------------------------------------------------------------- | -------------------------------------------- |
+| **Pipeline Orchestration**  | Download videos, manage steps, export clips/keyframes           | MoviePy or FFmpeg                            |
+| **Transcription**           | Generate time-aligned transcript from audio                      | Whisper (local or API)                       |
+| **Visual Keyframe Capture** | Extract keyframes around scene changes / product highlights      | OpenCV (e.g., `cv2.absdiff`, SSIM, hist diff) |
+| **Visual Understanding**    | Interpret outfits, objects, brand cues from keyframes            | LLaVA or GPT-4V                              |
+| **OCR / Logo Detection**    | Read on-screen text, detect brand logos                          | EasyOCR, YOLOv8                              |
+| **Trend Graph Construction**| Aggregate entities and prices across many videos into a trend map| NetworkX                                     |
+| **Sentiment / Intent**      | Capture sentiment or persuasive tone in speech/text              | TextBlob or VADER                            |
+
+High-level flow:
+
+1. Ingest a batch of videos and extract audio + candidate keyframes.
+2. Run Whisper to obtain a timestamped transcript.
+3. For each segment, align keyframes with transcript spans (temporal fusion).
+4. Apply vision (LLaVA / GPT-4V) + OCR + logo detection to extract products, brands, and prices.
+5. Build a graph of products, attributes, and price ranges across videos (NetworkX).
+6. Compute simple metrics (frequency, co-occurrence, growth) to identify candidate "trends".
+
+## Future scope
+
+To elevate this from a basic pipeline to a strong M.Tech-level research project:
+
+- **Advanced keyframe extraction**: Replace fixed-interval frames with shot-boundary / semantic-shift detection (histogram difference, SSIM, or transformer-based shot detection) to reduce redundant visual queries.
+- **Temporal multi-modal fusion**: Design an explicit alignment layer that reasons jointly over transcript spans + nearby frames, and study how this affects trend detection accuracy.
+- **Agentic verification loop**: Add a "search agent" that cross-checks discovered trends against external sources (e.g., YouTube/Google search APIs) to distinguish real trends from noise.
+- **Performance metrics & benchmarks**: Create a labeled dataset (e.g., 50–100 videos with manually annotated trends) and report precision/recall/F1 for trend detection and product classification across different model choices (Whisper sizes, LLaVA vs GPT-4V, etc.).
+- **Scalability experiments**: Measure runtime and cost as the number of videos and frame queries grow; explore batching, caching, and model distillation strategies.
+
+# Problem statement 2 - Agentic AI planning
 
 1. Problem - Evaluation of reasoning/planning capabilities of LLM 
 	1. Solution - PlanBench
@@ -66,13 +66,13 @@ Would you like me to provide a **YOLOv8 code block** to help you start detecting
 	2. https://arxiv.org/pdf/2512.24601
 8. Problem - COT and REACT has shown good capabilities in LLM for reasoning, but still there is issues. Issues like constraint violations, inconsistent state tracking, and brittle solutions that break under minor changes
 	1. Solution - Model First Reasoning. Error arises from inconsistent models. Hallucination is not merely the generation of false statements. Rather, it is a symptom of reasoning performed without a clearly defined model of the problem space.
-	2. ![[Pasted image 20260111204715.png | 200x 200]]
+	2. ![Img](20260111204715.png)
 	3. https://arxiv.org/pdf/2512.14474
 9. Problem - LLMs suffer from halliculations, outdated knowledge, high training and inference cost.  
 	1. Solution - Survery of all methods
 	2. https://arxiv.org/pdf/2508.17692
 10. Problem - 
-# Agentic AI tools
+# Problem statement 3 - Agentic AI tools
 1. Problem - API are not straightforward. They have domain specific rules like contract to be adhered to like id. Examples, instead of using id:UTS-16, agent uses id:16 and receives runtime error.
 	1. Solution - WILDAGTEVAL is novel benchmark consisting of 60 specific scenarios and 32 tests. This benchmark can be used to evlauate the agentic LLM.
 	2. Paper - https://arxiv.org/pdf/2601.00268v1
@@ -104,8 +104,8 @@ Would you like me to provide a **YOLOv8 code block** to help you start detecting
 		2. Solution - ToolGuards. Offline step to generate the toolguards from the companies tool repository. If a planned action violates a policy, the agent is prompted to selfreflect and revise its plan before proceeding
 12. Problem - In multi-turn conversational environments like τ -bench (Tau Bench), these agents often struggle with consistent reasoning, adherence to domain-specific policies, and extracting correct information over a long horizon of tool-calls and conversation.
 	1. Solution - we propose the Input-Reformulation Multi-Agent (IRMA) framework, which automatically reformulates user queries augmented with relevant domain rules and tool suggestions for the tool-calling agent to focus on.
-	2. ![[Pasted image 20260111125557.png]]
+	2. ![Img](img1.png)
     3. https://arxiv.org/pdf/2508.20931
 13. Problem - Tool overuse. Models could have solved using parametric knowledge, but still refer to external tools. when should the agent rely on external tools versus its own knowledge? LLMs unnecessarily invoking tools over 30% of the time
 	1. Solution - SMART (Strategic Model-Aware Reasoning with Tools). Empirical results show that SMARTAgent reduces tool use by 24% while improving overall performance by over 37%, effectively mitigating tool overuse.
-	2. ![[Pasted image 20260111125930.png]]
+	2. ![Img](20260111125930.png)
