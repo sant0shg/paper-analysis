@@ -39,6 +39,30 @@ To elevate this from a basic pipeline to a strong M.Tech-level research project:
 - **Performance metrics & benchmarks**: Create a labeled dataset (e.g., 50–100 videos with manually annotated trends) and report precision/recall/F1 for trend detection and product classification across different model choices (Whisper sizes, LLaVA vs GPT-4V, etc.).
 - **Scalability experiments**: Measure runtime and cost as the number of videos and frame queries grow; explore batching, caching, and model distillation strategies.
 
+## Related papers and datasets (data/)
+
+The following downloaded papers and datasets relevant to Problem statement 1 are stored in the data directory:
+
+- [A Keyframe-Based Approach for Auditing Bias in YouTube Shorts](data/A%20Keyframe-Based%20Approach%20for%20Auditing%20Bias%20in%20YouTube%20Shorts.pdf)
+- [Detecting Coordinated Behaviour on Video-First Platforms](data/Detecting%20Coordinated%20Behaviour%20on%20Video-First%20Platforms.pdf)
+- [Enrich and Detect: Video Temporal Grounding with Multimodal LLMs](data/Enrich%20and%20Detect-%20Video%20Temporal%20Grounding%20with%20Multimodal%20LLMs.pdf)
+- [Global YouTube Trending Dataset (2022–2025): Three Years of Platform Research](data/Global%20YouTube%20Trending%20Dataset%20(2022-2025)-%20Three%20Years%20of%20Platform%20Research.pdf)
+- [Higher-Order Vision-Language Alignment for Social Media Prediction](data/Higher-Order%20Vision-Language%20Alignment%20for%20Social%20Media%20Prediction.pdf)
+- [HyperFusion: Hierarchical Multimodal Ensemble Learning for Social Media Popularity Prediction](data/HyperFusion-%20Hierarchical%20Multimodal%20Ensemble%20Learning%20for%20Social%20Media%20Popularity%20Prediction.pdf)
+- [MVP: Winning Solution to SMP Challenge 2025 Video Track](data/MVP-%20Winning%20Solution%20to%20SMP%20Challenge%202025%20Video%20Track.pdf)
+- [SMPV: Social Media Prediction for Videos](data/_SMPV-%20Social%20Media%20Prediction%20for%20Videos.pdf)
+- [SMP Challenge Summary: Social Media Prediction Challenge](data/_SMP%20Challenge%20Summary-%20Social%20Media%20Prediction%20Challenge.pdf)
+- [FAME: Fusion-Aware Multi-modal Ensemble for Social Media Popularity Prediction](data/_FAME-%20Fusion-Aware%20Multi-modal%20Ensemble%20for%20Social%20Media%20Popularity%20Prediction.pdf)
+- [TVSum: Summarizing Web Videos Using Titles](data/TVSum_Summarizing_web_videos_using_titles.pdf)
+- [Unsupervised Video Summarization with Adversarial LSTM Networks](data/Unsupervised_Video_Summarization_with_Adversarial_LSTM_Networks.pdf)
+- [TimeLens: Rethinking Video Temporal Grounding with Multimodal LLMs](data/TimeLens-%20Rethinking%20Video%20Temporal%20Grounding%20with%20Multimodal%20LLMs.pdf)
+- [Video Understanding with Large Language Models: A Survey](data/Video%20Understanding%20with%20Large%20Language%20Models-%20A%20Survey.pdf)
+- [Global YouTube Trending Dataset – SMPDVideo](data/SMPDVideo.zip)
+- [ConnectedPapers BibTeX for MVP Paper](data/ConnectedPapers-for-MVP%3A-Winning-Solution-to-SMP-Challenge-2025-Video-Track.bib)
+- [Linen Shirts under 200 – Example Source Video](data/Linen%20Shirts%20under%20200%20#linenfashion%20#linenclothing%20#linenshirts%20#myntrashirt%20#mensfashion%20#meesho%20-%20Khanstyling%20(720p,%20h264,%20youtube).mp4)
+- [Book/Reference 1](data/978-3-030-72610-2.pdf)
+- [Book/Reference 2](data/978-3-031-43078-7.pdf)
+
 # Problem statement 2 - Agentic AI planning
 
 1. Problem - Evaluation of reasoning/planning capabilities of LLM 
