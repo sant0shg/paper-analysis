@@ -1,8 +1,6 @@
 # Problem statement - Analysis of short form videos to generate trends
 
-Design and evaluate an end-to-end, multi-modal pipeline that automatically extracts **fashion and pricing trends** from short-form product videos (e.g., YouTube/Instagram), inspired by the methods in:
-
-https://link.springer.com/article/10.1007/s00521-025-11218-1
+Design and evaluate an end-to-end, multi-modal pipeline that automatically extracts **fashion and pricing trends** from short-form product videos (e.g., YouTube/Instagram), 
 
 The system should jointly analyze audio (speech), visual frames, and on-screen text to detect emerging trends (e.g., "linen shirts under ₹200"), with a focus on **robustness, scalability, and research-grade evaluation** suitable for an M.Tech project.
 
