@@ -2,7 +2,7 @@
 
 Design and evaluate an end-to-end, multi-modal pipeline that automatically extracts **fashion and pricing trends** from short-form product videos (e.g., YouTube/Instagram), 
 
-The system should jointly analyze audio (speech), visual frames, and on-screen text to detect emerging trends (e.g., "linen shirts under ₹200"), with a focus on **robustness and scalability.
+The system should jointly analyze audio (speech), visual frames, and on-screen text to detect emerging trends (e.g., "linen shirts under ₹200"), with a focus on **robustness and scalability**.
 
 ## Tentative solution and packages
 
