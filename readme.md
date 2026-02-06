@@ -27,6 +27,13 @@ High-level flow:
 5. Build a graph of products, attributes, and price ranges across videos (NetworkX).
 6. Compute simple metrics (frequency, co-occurrence, growth) to identify candidate "trends".
 
+| Metric Category | Specific Metric | Description |
+| :--- | :--- | :--- |
+| **Extraction Accuracy** | IoU (Intersection over Union) | For OCR and Logo detection bounding boxes. |
+| **Temporal Alignment** | mAP@k (mean Average Precision) | How accurately the system grounds a product name to the correct video segment. |
+| **Trend Validity** | Precision/Recall of "Trends" | Validating system-generated trends against your manually labeled 50-video dataset. |
+| **System Efficiency** | Inference Cost vs. Accuracy | Comparing LLaVA (Local/Cheap) vs. GPT-4V (API/Expensive) in terms of trend discovery rate. |
+
 ## Future scope
 
 To elevate this from a basic pipeline to a strong M.Tech-level research project:
